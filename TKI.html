@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jurusan TKI - SMKN 3 Medan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & VARIABEL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #14532d;      /* hijau tua */
+            --secondary: #16a34a;    /* hijau */
+            --accent: #eab308;       /* kuning emas */
+            --bg-light: #f7fef9;
+            --text-dark: #0f172a;
+            --text-light: #475569;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo span {
+            color: var(--accent);
+            font-size: 0.8rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover {
+            color: var(--secondary);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 80vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.35);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin-bottom: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            text-shadow: 1px 1px 8px rgba(0,0,0,0.5);
+        }
+
+        /* ===== SECTION UMUM ===== */
+        section {
+            padding: 5rem 10%;
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .section-content.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .text-block {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .text-block p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .text-block ul {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--text-light);
+        }
+
+        .text-block ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .image-block {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .image-block img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .image-block:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ===== GRID MATA PELAJARAN ===== */
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .subject-card {
+            background: var(--white);
+            padding: 1.2rem;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        /* ===== THANK YOU SECTION ===== */
+        .thank-you {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+            padding: 4rem 10%;
+        }
+
+        .thank-you h2 {
+            color: var(--white);
+        }
+
+        .thank-you h2::after {
+            background: var(--white);
+        }
+
+        .thank-you p {
+            font-size: 1.15rem;
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+        }
+
+        .thank-you .professor {
+            font-style: italic;
+            font-weight: 300;
+            margin-top: 2rem;
+            font-size: 1rem;
+            opacity: 0.9;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 1.5rem;
+            display: inline-block;
+        }
+
+        .thank-you .school {
+            display: block;
+            font-weight: 700;
+            font-style: normal;
+            letter-spacing: 2px;
+            color: #fef3c7;
+            margin-top: 0.6rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #0b1220;
+            color: #94a3b8;
+            text-align: center;
+            padding: 2.5rem 5%;
+            font-size: 0.95rem;
+        }
+
+        footer .creator {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+
+        footer .class {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .hero-content p { font-size: 1rem; }
+            nav ul { display: none; }
+            section { padding: 3rem 5%; }
+            .section-content, .section-content.reverse { flex-direction: column; }
+            .text-block, .image-block { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <div class="logo">TKI<span>SMKN 3 MEDAN</span></div>
+        <ul>
+            <li><a href="#pengertian">Pengertian</a></li>
+            <li><a href="#sejarah">Sejarah</a></li>
+            <li><a href="#dipelajari">Apa yang Dipelajari</a></li>
+            <li><a href="#prospek">Prospek Kerja</a></li>
+            <li><a href="#manfaat">Manfaat</a></li>
+            <li><a href="#tujuan">Tujuan</a></li>
+            <li><a href="#kesimpulan">Kesimpulan</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <header class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge">SMKN 3 MEDAN</div>
+            <h1>Teknik Kimia Industri</h1>
+            <p>Mengolah bahan mentah menjadi produk bernilai guna, dengan skill proses dan keselamatan industri.</p>
+        </div>
+    </header>
+
+    <!-- ===== PENGERTIAN (GAMBAR BARU: PERALATAN LAB KIMIA) ===== -->
+    <section id="pengertian">
+        <h2>Pengertian Jurusan TKI</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p><strong>TKI (Teknik Kimia Industri)</strong> adalah jurusan di SMK yang mempelajari proses pengolahan bahan mentah menjadi barang setengah jadi atau barang jadi melalui serangkaian reaksi kimia dan operasi fisik.</p>
+                <p>Berbeda dengan jurusan Kimia Analis yang fokus pada pengujian mutu di laboratorium, TKI lebih menekankan pada <strong>operasi proses produksi di pabrik</strong>: bagaimana bahan mengalir, bereaksi, dipisahkan, dan menjadi produk akhir yang siap dipakai.</p>
+                <p>Lulusan TKI dibekali kemampuan mengoperasikan dan mengontrol peralatan industri kimia seperti reaktor, kolom distilasi, heat exchanger, serta memahami aspek keselamatan kerja (K3) dan pengolahan limbah.</p>
+            </div>
+            <div class="image-block">
+                <!-- Gambar: peralatan gelas laboratorium kimia (beaker, erlenmeyer, tabung reaksi) -->
+                <img src="https://images.unsplash.com/photo-1554475901-4538ddfbccc2?auto=format&fit=crop&w=800&q=80" alt="Peralatan gelas laboratorium kimia: beaker, erlenmeyer, dan tabung reaksi">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEJARAH ===== -->
+    <section id="sejarah" style="background: var(--white);">
+        <h2>Sejarah Jurusan TKI</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <p>Jurusan Teknik Kimia Industri memiliki akar sejarah yang panjang di Indonesia, seiring dengan pertumbuhan industri pengolahan—mulai dari pupuk, semen, petrokimia, hingga makanan dan minuman.</p>
+                <p>Di <strong>SMKN 3 Medan</strong> sendiri, cikal bakal jurusan ini sudah ada sejak sekolah masih bernama <strong>STM Kimia Swasta</strong> yang berdiri pada tahun 1963. Sejak saat itu, jurusan kimia menjadi salah satu program keahlian utama yang terus berkembang hingga menjadi TKI seperti sekarang.</p>
+                <p>Seiring kebutuhan industri yang semakin kompleks, kurikulum TKI terus diperbarui: dari proses konvensional hingga pengenalan otomasi, instrumentasi, dan kesadaran Industri 4.0.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=800&q=80" alt="Pabrik kimia dengan tangki dan pipa industri">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== APA YANG DIPELAJARI ===== -->
+    <section id="dipelajari">
+        <h2>Apa Saja yang Dipelajari?</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p>Selama tiga tahun, siswa TKI mempelajari perpaduan teori proses kimia dan praktik pengoperasian alat industri. Mata pelajaran inti meliputi:</p>
+                <div class="subject-grid">
+                    <div class="subject-card">Dasar Program Keahlian</div>
+                    <div class="subject-card">Azas Teknik Kimia</div>
+                    <div class="subject-card">Alat Industri Kimia</div>
+                    <div class="subject-card">Operasi Teknik Kimia</div>
+                    <div class="subject-card">Proses Industri Kimia</div>
+                    <div class="subject-card">Pengolahan Limbah</div>
+                    <div class="subject-card">Instrumentasi &amp; Kendali</div>
+                    <div class="subject-card">K3 &amp; Lingkungan</div>
+                    <div class="subject-card">Produk Kreatif &amp; Kewirausahaan</div>
+                </div>
+                <p style="margin-top: 1.5rem;">Praktik di laboratorium dan unit produksi menjadi bagian penting: mulai dari merangkai alat, membaca diagram proses (P&amp;ID), menghitung neraca massa, hingga simulasi start-up pabrik.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&w=800&q=80" alt="Siswa dengan jas laboratorium dan kacamata pelindung sedang praktikum">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROSPEK KERJA ===== -->
+    <section id="prospek" style="background: var(--white);">
+        <h2>Prospek Kerja Lulusan TKI</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <p>Industri kimia, farmasi, makanan, dan energi selalu berproduksi—artinya kebutuhan operator proses dan teknisi industri tidak pernah surut. Beberapa jalur karier yang bisa diambil lulusan TKI:</p>
+                <ul>
+                    <li><strong>Operator Proses / Field Operator:</strong> mengoperasikan dan memantau peralatan di lini produksi.</li>
+                    <li><strong>Panel / Room Operator:</strong> mengendalikan proses dari ruang kontrol (DCS/SCADA).</li>
+                    <li><strong>Operator Utility:</strong> mengelola boiler, cooling water, compressed air, dan IPAL.</li>
+                    <li><strong>QC Proses:</strong> melakukan pengujian mutu di titik-titik tertentu selama produksi.</li>
+                    <li><strong>Asisten K3 / EHS:</strong> memastikan prosedur keselamatan dan penanganan bahan kimia berjalan benar.</li>
+                </ul>
+                <p>Sektor yang menyerap lulusan TKI antara lain: pupuk &amp; petrokimia, farmasi &amp; kosmetik, makanan &amp; minuman, pulp &amp; paper, semen, refinery, serta perusahaan water treatment.</p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" alt="Operator industri memeriksa panel kontrol di pabrik">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MANFAAT ===== -->
+    <section id="manfaat">
+        <h2>Manfaat Jurusan TKI</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <ul>
+                    <li><strong>Skill langsung pakai:</strong> lulusan siap bekerja sebagai operator proses karena terbiasa dengan alur produksi dan prosedur keselamatan.</li>
+                    <li><strong>Permintaan industri tinggi:</strong> hampir setiap pabrik manufaktur kimia membutuhkan tenaga terampil di lini produksi.</li>
+                    <li><strong>Jalur karier yang jelas:</strong> dari operator junior, senior operator, supervisor, hingga process technician.</li>
+                    <li><strong>Fleksibel:</strong> bisa langsung kerja, melanjutkan kuliah (D4/S1 Teknik Kimia, Teknik Lingkungan, Bioproses), atau membuka jasa konsultasi GMP/HACCP dan water treatment skala UMKM.</li>
+                    <li><strong>Kesadaran K3 dan lingkungan:</strong> menjadi nilai tambah di industri yang semakin ketat standar keselamatannya.</li>
+                </ul>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80" alt="Teknisi memeriksa peralatan industri kimia">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TUJUAN (GAMBAR BARU: ANALIS LARUTAN KIMIA) ===== -->
+    <section id="tujuan" style="background: var(--white);">
+        <h2>Tujuan Jurusan TKI</h2>
+        <div class="section-content reverse">
+            <div class="text-block">
+                <ul>
+                    <li>Mempersiapkan siswa menjadi operator dan teknisi proses yang kompeten di industri kimia.</li>
+                    <li>Membekali siswa dengan pemahaman proses produksi, keselamatan kerja, dan pengelolaan limbah.</li>
+                    <li>Menumbuhkan sikap disiplin, teliti, dan patuh prosedur—karakter utama di lingkungan pabrik.</li>
+                    <li>Menyiapkan lulusan yang mampu beradaptasi dengan perkembangan teknologi industri (otomasi dan digitalisasi).</li>
+                    <li>Membuka wawasan kewirausahaan di bidang jasa teknik kimia dan pengolahan.</li>
+                </ul>
+            </div>
+            <div class="image-block">
+                <!-- Gambar: ilmuwan/analis sedang menganalisis larutan kimia dengan pipet & tabung reaksi -->
+                <img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&w=800&q=80" alt="Analis laboratorium sedang menganalisis larutan kimia menggunakan pipet dan tabung reaksi">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== KESIMPULAN ===== -->
+    <section id="kesimpulan">
+        <h2>Kesimpulan</h2>
+        <div class="section-content">
+            <div class="text-block">
+                <p>Teknik Kimia Industri adalah jurusan yang menjembatani ilmu kimia dengan dunia produksi nyata. Siswa tidak hanya belajar rumus dan reaksi, tetapi juga bagaimana mengelola aliran bahan, mengoperasikan alat, menjaga keselamatan, dan menghasilkan produk yang bermanfaat.</p>
+                <p>Dengan kebutuhan industri yang terus berjalan—dari makanan hingga energi—lulusan TKI memiliki peluang karier yang stabil dan terus berkembang. Jurusan ini cocok bagi mereka yang teliti, suka bekerja dengan alat dan proses, serta peduli pada keselamatan dan lingkungan.</p>
+                <p><strong>TKI adalah pilihan tepat untuk menjadi bagian dari mesin produksi yang menghidupkan industri nasional.</strong></p>
+            </div>
+            <div class="image-block">
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="Pemandangan pabrik kimia dengan cerobong dan infrastruktur">
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== THANK YOU ===== -->
+    <section class="thank-you">
+        <h2>Terima Kasih</h2>
+        <p>Terima kasih sudah mengunjungi website ini.</p>
+        <p>Thank you for visiting this website.</p>
+        <p>このウェブサイトにお越しいただき、ありがとうございます。</p>
+        <p class="professor">
+            "Professor of Information Technology and Chemical Engineering"
+            <span class="school">SMKN 3 MEDAN</span>
+        </p>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>Pembuat website:</p>
+        <p class="creator">MIKAIL FALAQ GIBRAN SITORUS</p>
+        <p class="class">X TKI 1</p>
+    </footer>
+
+</body>
+</html>
